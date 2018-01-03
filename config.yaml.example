@@ -6,3 +6,4 @@ slack:
 alpha_vantage:
   # An API key provided by you for your Alpha Vantage account
   key: ND6Y9VPQOMB2VGS8
+  endpoint: https://www.alphavantage.co/query

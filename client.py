@@ -20,7 +20,7 @@ def start_bot(config):
 	bot_id = client.api_call("auth.test")["user_id"]
 	print('Bot ID is: ' + bot_id)
 	
-	bot = traderbot.TraderBot()
+	bot = traderbot.TraderBot(config,client.api_call('users.list'))
 	
 	# Message listener loop
 	while True:
