@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import slackclient, time, argparse, websocket
+import slackclient, time, argparse, websocket, yaml, os, sys
 import traderbot
 
 
@@ -67,18 +67,16 @@ Parse arguments and start a bot
 if __name__ == '__main__':
 	
 	parser = argparse.ArgumentParser()
-	
-	parser.add_argument('-d', '--delay',
-		type = float,
-		help = 'Time in seconds to wait between fetching messages',
-		default = 0.5,
-	)
-	
-	parser.add_argument('token',
-		type = str,
-		help = 'Slack token for connecting to a Slack team',
-	)
+	parser.add_argument('-c','--config',
+			type = str,
+			default = './config.yaml',
+			help = 'Path to config file for the TraderBot')
 	
 	args = parser.parse_args()
-	start_bot(args.token, args.delay)
+	if not os.path.exists(args.config):
+		parser.print_help()
+		sys.exit(1)
+	with open(args.config,'r') as f:
+		config = yaml.load(f)
+	start_bot(config['slack']['key'], config['slack']['delay'])
 	
