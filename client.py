@@ -7,9 +7,10 @@ import traderbot
 '''
 Connect to a Slack team and start the bot
 '''
-def start_bot(slack_token, listen_delay):
+def start_bot(config):
 	
-	client = slackclient.SlackClient(slack_token)
+	client = slackclient.SlackClient(config['slack']['key'])
+	timeout = config['slack']['delay']
 	
 	if not client.rtm_connect():
 		print('Connection Failed')
@@ -26,9 +27,13 @@ def start_bot(slack_token, listen_delay):
 		
 		try:
 			stream = client.rtm_read()
+			print("Inside event loop")
+			print("stream is:{}".format(stream))
 			
 			# Read all events in stream, react to user-entered messages only
 			for event in stream:
+				print("parsing an event")
+				print("event is {}".format(event))
 				if 'type' in event and 'channel' in event and 'text' in event and 'user' in event and event['type'] == 'message':
 					
 					channel = event['channel']
@@ -58,7 +63,7 @@ def start_bot(slack_token, listen_delay):
 				print('Success')
 				
 		# Delay the next listen loop
-		time.sleep(listen_delay)
+		time.sleep(timeout)
 		
 		
 '''

@@ -1,8 +1,0 @@
-slack:
-	# An API key provided by you for your Slack group.
-        key: enter-slack-key-here
-	# A numerical value representing how often the slack bot will check for incoming messages. 
-        delay: 0.5
-alpha_vantage:
-	# An API key provided by you for your Alpha Vantage account
-        key: ND6Y9VPQOMB2VGS8
