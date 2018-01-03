@@ -83,5 +83,5 @@ if __name__ == '__main__':
 		sys.exit(1)
 	with open(args.config,'r') as f:
 		config = yaml.load(f)
-	start_bot(config['slack']['key'], config['slack']['delay'])
+	start_bot(config)
 	
